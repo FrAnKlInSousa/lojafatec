@@ -1,0 +1,23 @@
+<section class="auth-page">
+  <div class="auth-card">
+    <span class="eyebrow">Bem-vindo de volta</span>
+    <h1>Entrar</h1>
+
+    <form>
+      <label for="" class="form-label">E-mail</label>
+      <input type="email" class="form-control mb-3" [(ngModel)]="email" name="email">
+
+      <label for="" class="form-label">Senha</label>
+      <input type="password" class="form-control mb-2" [(ngModel)]="senha" name="senha">
+
+      <a href="/recuperar-senha" class="forgot">Esqueci minha senha</a>
+
+      <button class="btn btn-dark w-100 mt-4">Entrar</button>
+
+    </form>
+
+    <p class="mt-4 mb-0">Ainda não tem conta?
+      <a routerLink="/cadastro">Cadastre-se</a>
+    </p>
+  </div>
+</section>
