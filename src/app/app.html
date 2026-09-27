@@ -7,7 +7,14 @@
 
       <a routerLink="/carrinho" class="nav-link">Carrinho</a>
 
-      <a routerLink="/login" class="nav-link">Entrar</a>
+      <a *ngIf="!estaLogado" routerLink="/login" class="nav-link">Entrar</a>
+
+      <a
+        *ngIf="estaLogado"
+        type="button"
+        routerLink="/login"
+        class="nav-link btn btn-link"
+        (click)="logout()">Sair</a>
     </div>
 
   </div>
