@@ -1,26 +1,67 @@
 <section class="auth-page">
   <div class="auth-card">
-    <span class="eyebrow">Bem-vindo de volta</span>
-    <h1>Entrar</h1>
+
+    <div class="auth-header">
+      <span class="eyebrow">Bem-vindo de volta</span>
+      <h1>Entrar</h1>
+      <p>Entre na sua conta para continuar.</p>
+    </div>
 
     <form (ngSubmit)="entrar()">
-      <label for="email" class="form-label">E-mail</label>
-      <input id="email" type="email" class="form-control mb-3" [(ngModel)]="email" name="email">
 
-      <label for="senha" class="form-label">Senha</label>
-      <input id="senha" type="password" class="form-control mb-2" [(ngModel)]="senha" name="senha">
+      <div class="mb-3">
+        <label for="email" class="form-label">
+          E-mail
+        </label>
 
-      <a routerLink="/recuperar-senha" class="forgot">Esqueci minha senha</a>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          [(ngModel)]="email"
+          name="email"
+        >
+      </div>
+
+      <div class="mb-2">
+        <label for="senha" class="form-label">
+          Senha
+        </label>
+
+        <input
+          id="senha"
+          type="password"
+          class="form-control"
+          [(ngModel)]="senha"
+          name="senha"
+        >
+      </div>
+
+      <div class="text-end mb-3">
+        <a routerLink="/recuperar-senha">
+          Esqueci minha senha
+        </a>
+      </div>
 
       <p class="text-danger" *ngIf="erro">
         {{erro}}
       </p>
-      <button type="submit" class="btn btn-dark w-100 mt-4">Entrar</button>
+
+      <button
+        type="submit"
+        class="btn btn-dark w-100"
+      >
+        Entrar
+      </button>
 
     </form>
 
-    <p class="mt-4 mb-0">Ainda não tem conta?
-      <a routerLink="/cadastro">Cadastre-se</a>
-    </p>
+    <div class="auth-footer">
+      <span>Ainda não tem conta?</span>
+      <a routerLink="/cadastro">
+        Cadastre-se
+      </a>
+    </div>
+
   </div>
 </section>
