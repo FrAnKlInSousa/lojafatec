@@ -3,6 +3,7 @@ import { Component, inject} from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { LivrosService } from '../../services/livros.service';
 import { CarrinhoService } from '../../services/carrinho.service';
+import { Livro } from '../../models/livro';
 
 @Component({
   selector: 'app-produto',
@@ -17,4 +18,15 @@ export class Produto {
   readonly livro = this.livrosService.buscarPorId(
     Number(this.route.snapshot.paramMap.get('id'))
   );
+  adicionadoAoCarrinho = false;
+
+  adicionarAoCarrinho(livro: Livro): void{
+    this.carrinho.adicionar(livro);
+
+    this.adicionadoAoCarrinho = true;
+
+    setTimeout(()=>{
+      this.adicionadoAoCarrinho = false;
+    }, 2000);
+  }
 }

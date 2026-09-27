@@ -17,7 +17,12 @@
 
     <p class="description">{{item.descricao}}</p>
 
-    <button class="btn btn-dark btn-lg px-4" (click)="carrinho.adicionar(item)">Adicionar no carrinho</button>
+    <button
+      class="btn btn-dark btn-lg px-4"
+      (click)="adicionarAoCarrinho(item)"
+    >
+    {{ adicionadoAoCarrinho ? 'Adicionado ao carrinho' : 'Adicionar no carrinho'}}
+    </button>
 
   </div>
 </section>
