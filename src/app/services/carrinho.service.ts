@@ -22,7 +22,7 @@ export class CarrinhoService{
   }
 
   remover(livroId: number): void{
-    this.itens = this.itens = this.itens.filter((item) => item.livro.id !== livroId);
+    this.itens = this.itens.filter((item) => item.livro.id !== livroId);
   }
 
   quantidadeTotal(): number {
