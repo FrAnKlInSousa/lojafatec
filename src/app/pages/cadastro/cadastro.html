@@ -1,1 +1,23 @@
-<p>cadastro works!</p>
+<section class="auth-page">
+  <div class="auth-card">
+    <span class="eyebrow">Nova conta</span>
+    <h1>Cadastrar</h1>
+
+    <form>
+      <label for="nome" class="form-label">Nome</label>
+      <input id="nome" type="text" class="form-control mb-3" [(ngModel)]="nome" name="nome">
+
+      <label for="email" class="form-label">Email</label>
+      <input id="email" type="email" class="form-control mb-3" name="email" [(ngModel)]="email">
+
+      <label for="senha" class="form-label"></label>
+      <input type="password" id="senha" class="form-control mb-3" [(ngModel)]="senha" name="senha">
+
+      <button class="btn btn-dark w-100" type="submit">Criar conta</button>
+    </form>
+
+    <p class="mt-4 mb-0">Já possui cadastro?
+      <a routerLink="/login">Entrar</a>
+    </p>
+  </div>
+</section>
