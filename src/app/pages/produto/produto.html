@@ -12,14 +12,24 @@
         <img [src]="item.capa" [alt]="'Capa de ' + item.titulo">
       </div>
     </div>
+    ---
 
-    <div class="col-md-7 product-info">
-      <small class="category">{{item.categorias.join(' • ')}}</small>
-      <h1>{{item.titulo}}</h1>
-      <p class="author">{{item.autor}}</p>
-      <div class="price">{{item.preco | currency:'BRL'}}</div>
+    <div class="col-md-7">
+      <div class="product-info">
+        <small class="category">
+          {{item.categorias.join(' • ')}}
+        </small>
 
-      <div class="col-12">
+        <h1>{{item.titulo}}</h1>
+
+        <p class="author">
+          {{item.autor}}
+        </p>
+
+        <div class="price">
+          {{item.preco | currency:'BRL'}}
+        </div>
+
         <button
           class="btn btn-dark add-to-cart"
           (click)="adicionarAoCarrinho(item)"
@@ -34,6 +44,7 @@
         </button>
       </div>
     </div>
+    ---
 
     <div class="description-section">
       <h2>Sobre o livro</h2>
