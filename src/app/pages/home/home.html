@@ -14,9 +14,15 @@
 
       <div class="col-lg-5 d-none d-lg-block">
         <div class="book-stack">
-          <div class="fake-book book-one" *ngIf="livrosDestaque[0]">{{livrosDestaque[0].titulo}}</div>
-          <div class="fake-book book-two" *ngIf="livrosDestaque[1]">{{livrosDestaque[1].titulo}}</div>
-          <div class="fake-book book-three" *ngIf="livrosDestaque[1]">{{livrosDestaque[2].titulo}}</div>
+          <div class="fake-book book-one" *ngIf="livrosDestaque[0]">
+            <img [src]="livrosDestaque[0].capa" [alt]="'Capa de ' + livrosDestaque[0].titulo">
+          </div>
+          <div class="fake-book book-two" *ngIf="livrosDestaque[1]">
+            <img [src]="livrosDestaque[1].capa" [alt]="'Capa de ' + livrosDestaque[1].titulo">
+          </div>
+          <div class="fake-book book-three" *ngIf="livrosDestaque[1]">
+            <img [src]="livrosDestaque[2].capa" [alt]="'Capa de ' + livrosDestaque[2].titulo">
+          </div>
         </div>
       </div>
     </div>

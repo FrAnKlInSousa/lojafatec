@@ -1,0 +1,37 @@
+.book-stack {
+  position: relative;
+  height: 420px;
+}
+
+.fake-book {
+  position: absolute;
+  width: 190px;
+  height: 290px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.fake-book img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-one {
+  top: 20px;
+  left: 120px;
+  transform: rotate(8deg);
+}
+
+.book-two {
+  top: 50px;
+  left: 40px;
+  transform: rotate(-8deg);
+}
+
+.book-three {
+  top: 90px;
+  left: 90px;
+  transform: rotate(2deg);
+}
