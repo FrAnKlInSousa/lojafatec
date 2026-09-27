@@ -11,4 +11,11 @@ import { CarrinhoService } from '../../services/carrinho.service';
 })
 export class Carrinho {
   readonly carrinho = inject(CarrinhoService);
+
+  compraFinalizada = false;
+
+  finalizarCompra(): void{
+    this.carrinho.limpar();
+    this.compraFinalizada = true;
+  }
 }
