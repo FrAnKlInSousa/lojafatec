@@ -1,4 +1,7 @@
-<section class="container py-5">
+<section
+  class="container py-5"
+  *ngIf="!compraFinalizada"
+>
   <div class="mb-4">
     <span class="eyebrow">SUA COMPRA</span>
     <h1>Carrinho</h1>
@@ -8,13 +11,21 @@
     <div class="col-lg-8">
       <article class="cart-item" *ngFor="let item of carrinho.listar()">
         <img [src]="item.livro.capa" [alt]="item.livro.titulo">
+
         <div class="flex-grow-1">
           <h2>{{ item.livro.titulo }}</h2>
           <p>{{ item.livro.autor }}</p>
           <span>{{ item.quantidade }} unidade(s)</span>
         </div>
-        <strong>{{ item.livro.preco * item.quantidade | currency:'BRL' }}</strong>
-        <button class="btn btn-sm btn-outline-danger" (click)="carrinho.remover(item.livro.id)">
+
+        <strong>
+          {{ item.livro.preco * item.quantidade | currency:'BRL' }}
+        </strong>
+
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="carrinho.remover(item.livro.id)"
+        >
           Remover
         </button>
       </article>
@@ -23,12 +34,20 @@
     <div class="col-lg-4">
       <aside class="summary">
         <h2>Resumo</h2>
+
         <div class="d-flex justify-content-between">
           <span>Subtotal</span>
           <strong>{{ carrinho.total() | currency:'BRL' }}</strong>
         </div>
+
         <hr>
-        <button class="btn btn-dark w-100" (click)="finalizarCompra()">Finalizar compra</button>
+
+        <button
+          class="btn btn-dark w-100"
+          (click)="finalizarCompra()"
+        >
+          Finalizar compra
+        </button>
       </aside>
     </div>
   </div>
@@ -37,19 +56,24 @@
     <div class="empty">
       <h2>Seu carrinho está vazio.</h2>
       <p>Que tal encontrar uma nova história?</p>
-      <a routerLink="/" class="btn btn-dark">Explorar livros</a>
+      <a routerLink="/" class="btn btn-dark">
+        Explorar livros
+      </a>
     </div>
   </ng-template>
 </section>
 
-<section class="container py-5 text-center">
+<section
+  class="container py-5 text-center"
+  *ngIf="compraFinalizada"
+>
   <h1>Compra realizada com sucesso!</h1>
+
   <p class="mt-3">
     Obrigado pela sua compra.
   </p>
-  <a href="/" class="btn btn-dark mt-3">Voltar para a loja</a>
-</section>
 
-<section class="container py-5" *ngIf="!compraFinalizada">
-  <!-- carrinho atual -->
-  </section>
+  <a routerLink="/" class="btn btn-dark mt-3">
+    Voltar para a loja
+  </a>
+</section>
