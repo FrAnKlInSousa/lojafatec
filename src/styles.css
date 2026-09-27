@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #f7f5f2;
+}
+
 .auth-page {
   min-height: calc(100vh - 58px);
   display: flex;
