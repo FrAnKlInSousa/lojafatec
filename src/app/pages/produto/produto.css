@@ -18,7 +18,7 @@
 
 .product-cover img {
   width: 100%;
-  max-width: 310px;
+  max-width: 240px;
   height: auto;
   object-fit: contain;
   border-radius: 6px;
@@ -65,7 +65,9 @@
 }
 
 .add-to-cart {
-  margin-top: 2rem;
+  display: block;
+  width: fit-content;
+  margin: 3rem auto 0;
 }
 
 .product-footer {

@@ -18,6 +18,21 @@
       <h1>{{item.titulo}}</h1>
       <p class="author">{{item.autor}}</p>
       <div class="price">{{item.preco | currency:'BRL'}}</div>
+
+      <div class="col-12">
+        <button
+          class="btn btn-dark add-to-cart"
+          (click)="adicionarAoCarrinho(item)"
+        >
+          <span *ngIf="!adicionadoAoCarrinho">
+            Adicionar no carrinho
+          </span>
+
+          <span *ngIf="adicionadoAoCarrinho">
+            Adicionado ao carrinho
+          </span>
+        </button>
+      </div>
     </div>
 
     <div class="description-section">
@@ -27,18 +42,7 @@
       </p>
     </div>
 
-    <button
-      class="btn btn-dark add-to-cart"
-      (click)="adicionarAoCarrinho(item)"
-    >
-      <span *ngIf="!adicionadoAoCarrinho">
-        Adicionar no carrinho
-      </span>
 
-      <span *ngIf="adicionadoAoCarrinho">
-        Adicionado ao carrinho
-      </span>
-    </button>
 
     <div class="product-footer">
     <a routerLink="/" class="btn btn-outline-dark">
