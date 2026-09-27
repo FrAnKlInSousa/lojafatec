@@ -3,7 +3,11 @@
     <span class="eyebrow">Nova conta</span>
     <h1>Cadastrar</h1>
 
-    <form>
+    <form (ngSubmit)="cadastrar()">
+      <div class="alert alert-danger"
+      *ngIf="erro">
+        {{erro}}
+      </div>
       <label for="nome" class="form-label">Nome</label>
       <input id="nome" type="text" class="form-control mb-3" [(ngModel)]="nome" name="nome">
 
