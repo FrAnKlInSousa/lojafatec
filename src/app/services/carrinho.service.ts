@@ -34,7 +34,7 @@ export class CarrinhoService{
 
   diminuirQuantidade(livroId: number): void{
     const item = this.itens.find(
-      (itemCarrinho) => itemCarrinho.livro.id !== livroId
+      (itemCarrinho) => itemCarrinho.livro.id === livroId
     );
 
     if(!item){

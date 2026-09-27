@@ -15,7 +15,7 @@
         <div class="flex-grow-1">
           <h2>{{ item.livro.titulo }}</h2>
           <p>{{ item.livro.autor }}</p>
-          <span>{{ item.quantidade }} unidade(s)</span>
+          <span>{{ item.quantidade }} {{item.quantidade === 1 ? 'unidade' : 'unidades' }}</span>
         </div>
 
         <strong>
