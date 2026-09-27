@@ -1,1 +1,43 @@
-<p>carrinho works!</p>
+<section class="container py-5">
+  <div class="mb-4">
+    <span class="eyebrow">SUA COMPRA</span>
+    <h1>Carrinho</h1>
+  </div>
+
+  <div *ngIf="carrinho.listar().length; else vazio" class="row g-4">
+    <div class="col-lg-8">
+      <article class="cart-item" *ngFor="let item of carrinho.listar()">
+        <img [src]="item.livro.capa" [alt]="item.livro.titulo">
+        <div class="flex-grow-1">
+          <h2>{{ item.livro.titulo }}</h2>
+          <p>{{ item.livro.autor }}</p>
+          <span>{{ item.quantidade }} unidade(s)</span>
+        </div>
+        <strong>{{ item.livro.preco * item.quantidade | currency:'BRL' }}</strong>
+        <button class="btn btn-sm btn-outline-danger" (click)="carrinho.remover(item.livro.id)">
+          Remover
+        </button>
+      </article>
+    </div>
+
+    <div class="col-lg-4">
+      <aside class="summary">
+        <h2>Resumo</h2>
+        <div class="d-flex justify-content-between">
+          <span>Subtotal</span>
+          <strong>{{ carrinho.total() | currency:'BRL' }}</strong>
+        </div>
+        <hr>
+        <button class="btn btn-dark w-100" disabled>Finalizar compra</button>
+      </aside>
+    </div>
+  </div>
+
+  <ng-template #vazio>
+    <div class="empty">
+      <h2>Seu carrinho está vazio.</h2>
+      <p>Que tal encontrar uma nova história?</p>
+      <a routerLink="/" class="btn btn-dark">Explorar livros</a>
+    </div>
+  </ng-template>
+</section>
