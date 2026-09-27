@@ -1,1 +1,32 @@
-<p>produto works!</p>
+<section class="container py-5" *ngIf="livro as item">
+  <a routerLink="/" class="back-link">Voltar para a loja</a>
+
+  <div class="row g-5 align-items-start mt-2">
+    <div class="col-md-5">
+      <div class="product-cover">
+        <img [src]="item.capa" [alt]="'Capa de ' + item.titulo">
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <small class="category">{{item.categoria}}</small>
+      <h1>{{item.titulo}}</h1>
+      <p class="author">{{item.autor}}</p>
+      <div class="price">{{item.preco | currency:'BRL'}}</div>
+    </div>
+
+    <p class="description">{{item.descricao}}</p>
+
+    <button class="btn btn-dark btn-lg px-4" (click)="carrinho.adicionar(item)">Adicionar no carrinho</button>
+
+    <div class="added-note mt-3">
+      Compra realizada com sucesso!!
+    </div>
+  </div>
+</section>
+
+<section class="container py-5" *ngIf="!livro">
+  <h1>Livro não encontrado</h1>
+  <a routerLink="/" class="btn btn-dark">Voltar para a loja</a>
+
+</section>
