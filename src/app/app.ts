@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class App {
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
   protected readonly title = signal('livros');
 
   get estaLogado(): boolean{
@@ -19,5 +20,6 @@ export class App {
 
   logout(): void{
     this.authService.logout();
+    this.router.navigate(['/login'])
   }
 }
