@@ -21,7 +21,13 @@
       class="btn btn-dark btn-lg px-4"
       (click)="adicionarAoCarrinho(item)"
     >
-    {{ adicionadoAoCarrinho ? 'Adicionado ao carrinho' : 'Adicionar no carrinho'}}
+      <span *ngIf="!adicionadoAoCarrinho">
+        Adicionar no carrinho
+      </span>
+
+      <span *ngIf="adicionadoAoCarrinho">
+        Adicionado ao carrinho
+      </span>
     </button>
 
   </div>
