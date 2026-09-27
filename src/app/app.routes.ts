@@ -7,6 +7,7 @@ import { Produto } from './pages/produto/produto';
 import { Carrinho } from './pages/carrinho/carrinho';
 
 export const routes: Routes = [
+  {path: '', component: Home},
   {path: 'login', component: Login},
   {path: 'recuperar-senha', component: RecuperarSenha},
   {path: 'cadastro', component: Cadastro},
