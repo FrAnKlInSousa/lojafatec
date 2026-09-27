@@ -9,31 +9,36 @@
           Explore clássicos, ficção, fantasia e histórias que merecem um espaço na sua estante.
         </p>
 
-        <span class="search-label">
-          Encontre por título, autor ou categoria
-        </span>
+        <div class="hero-filters">
+          <i class="bi bi-search"></i>
 
-        <div class="hero-search">
-          <input
-            [(ngModel)]="termo"
-            placeholder="Digite um título ou autor..."
-          >
-        </div>
-
-        <div class="mt-3">
-          <select
-            class="form-select"
-            [(ngModel)]="categoriaSelecionada"
-          >
-            <option value="">Todas as categorias</option>
-
-            <option
-              *ngFor="let categoria of categorias"
-              [value]="categoria"
+          <div class="hero-search">
+            <input
+              [(ngModel)]="termo"
+              placeholder="Digite um título ou autor..."
             >
-              {{ categoria }}
-            </option>
-          </select>
+          </div>
+
+          <div class="category-filter">
+            <span class="filter-icon">
+              <i class="bi bi-funnel"></i>
+            </span>
+
+            <select
+              class="form-select"
+              [(ngModel)]="categoriaSelecionada"
+            >
+              <option value="">Todas as categorias</option>
+
+              <option
+                *ngFor="let categoria of categorias"
+                [value]="categoria"
+              >
+                {{ categoria }}
+              </option>
+            </select>
+          </div>
+
         </div>
       </div>
 
