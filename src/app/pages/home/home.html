@@ -1,1 +1,55 @@
-<p>home works!</p>
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="eyebrow">Uma boa história começa aqui</span>
+        <h1>Encontre seu próximo livro</h1>
+        <p>Explore clássicos, ficção, fantasia e histórias que merecem um espaço na sua estante.</p>
+
+        <div class="hero-search">
+          <span>⌕</span>
+          <input [(ngModel)]="termo" placeholder="Digite um título ou autor...">
+        </div>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="book-stack">
+          <div class="fake-book book-one">1984</div>
+          <div class="fake-book book-two">O Hobbit</div>
+          <div class="fake-book book-three">Dom Casmurro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">Catálogo</span>
+      <h2>Livros em destaque</h2>
+    </div>
+
+    <span>{{ livrosFiltrados.length }} livros encontrados</span>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-lg-4" *ngFor="let livro of livrosFiltrados">
+      <article class="book-card h-100">
+        <a routerLink="['/produto', livro.id]" class="cover">
+          <img src="livro.capa" [alt]="'Capa de' + livro.titulo">
+        </a>
+
+        <div class="p-3">
+          <small>{{livro.categoria}}</small>
+          <h3>{{livro.titulo}}</h3>
+          <p class="autor">{{livro.autor}}</p>
+          <div class="d-flex justify-contetn-between align-items-center">
+            <strong>{{livro.preco | currency:'BRL'}}</strong>
+            <a [routerLink]="['/produto', livro.id]" class="btn btn dark btn-sm">Ver livro</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
