@@ -1,0 +1,24 @@
+import { Injectable } from "@angular/core";
+import { Livro } from "../models/livro";
+import { LIVROS } from "../data/livros";
+
+@Injectable({providedIn: 'root'})
+export class LivrosService{
+  listar(): Livro[] {
+    return LIVROS;
+  }
+
+  buscarPorId(id: number): Livro | undefined {
+    return LIVROS.find((livro) => livro.id === id);
+  }
+
+  buscar(termo: string): Livro[] {
+    const busca = termo.trim().toLocaleLowerCase();
+
+    if(!busca) return LIVROS;
+    return LIVROS.filter((livro) =>
+      livro.titulo.toLocaleLowerCase().includes(busca)
+      ||
+      livro.autor.toLocaleLowerCase().includes(busca));
+  }
+}
