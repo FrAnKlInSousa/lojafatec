@@ -9,44 +9,50 @@
 
   <div *ngIf="carrinho.listar().length; else vazio" class="row g-4">
     <div class="col-lg-8">
-      <article class="cart-item" *ngFor="let item of carrinho.listar()">
-        <img [src]="item.livro.capa" [alt]="item.livro.titulo">
 
-        <div class="flex-grow-1">
+      <article class="cart-item" *ngFor="let item of carrinho.listar()">
+
+        <img
+          class="cart-cover"
+          [src]="item.livro.capa"
+          [alt]="item.livro.titulo"
+        >
+
+        <div class="cart-info">
           <h2>{{ item.livro.titulo }}</h2>
           <p>{{ item.livro.autor }}</p>
-          <span>{{ item.quantidade }} {{item.quantidade === 1 ? 'unidade' : 'unidades' }}</span>
+
+          <div class="quantity-control">
+            <button
+              type="button"
+              class="btn btn-outline-secondary quantity-button"
+              (click)="carrinho.diminuirQuantidade(item.livro.id)"
+              aria-label="Diminuir quantidade"
+            >
+              <i class="bi bi-dash"></i>
+            </button>
+
+            <span class="quantity-value">
+              {{ item.quantidade }}
+            </span>
+
+            <button
+              type="button"
+              class="btn btn-outline-secondary quantity-button"
+              (click)="carrinho.adicionar(item.livro)"
+              aria-label="Aumentar quantidade"
+            >
+              <i class="bi bi-plus"></i>
+            </button>
+          </div>
         </div>
 
-        <strong>
+        <strong class="cart-price">
           {{ item.livro.preco * item.quantidade | currency:'BRL' }}
         </strong>
 
-        <div class="quantity-control">
-          <button
-            type="button"
-            class="btn btn-outline-secondary quantity-button"
-            (click)="carrinho.diminuirQuantidade(item.livro.id)"
-            aria-label="Diminuir quantidade"
-          >
-            <i class="bi bi-dash"></i>
-          </button>
-
-          <span class="quantity-value">
-            {{ item.quantidade }}
-          </span>
-
-          <button
-            type="button"
-            class="btn btn-outline-secondary quantity-button"
-            (click)="carrinho.adicionar(item.livro)"
-            aria-label="Aumentar quantidade"
-          >
-            <i class="bi bi-plus"></i>
-          </button>
-        </div>
-
       </article>
+
     </div>
 
     <div class="col-lg-4">
