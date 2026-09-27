@@ -4,7 +4,7 @@ import { ItemCarrinho } from "../models/item-carrinho";
 
 @Injectable({providedIn: 'root'})
 export class CarrinhoService{
-  private itens: ItemCarrinho[] = [];
+  private itens: ItemCarrinho[] = this.carregar();
 
   listar(): ItemCarrinho[]{
     return this.itens;
@@ -15,10 +15,19 @@ export class CarrinhoService{
 
     if(item){
       item.quantidade++;
-      return;
-    }
 
-    this.itens.push({livro, quantidade: 1});
+    }else{
+      this.itens.push({
+        livro,
+        quantidade: 1
+      });
+    }
+    this.salvar();
+  }
+
+  limpar(): void{
+    this.itens = [];
+    this.salvar();
   }
 
   remover(livroId: number): void{
@@ -34,6 +43,17 @@ export class CarrinhoService{
       (total, item) => total + item.livro.preco * item.quantidade, 0
     )
   }
+
+  private salvar(): void{
+    localStorage.setItem('carrinho', JSON.stringify(this.itens));
+  }
+
+  private carregar(): ItemCarrinho[]{
+    const dados = localStorage.getItem('carrinho');
+    return dados ? JSON.parse(dados) : [];
+  }
+
+
 
 
 }
