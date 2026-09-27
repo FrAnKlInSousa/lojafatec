@@ -16,6 +16,7 @@
 }
 
 .fake-book {
+  display: block;
   position: absolute;
   width: 140px;
   height: 215px;
