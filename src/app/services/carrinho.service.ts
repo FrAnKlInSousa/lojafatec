@@ -12,7 +12,8 @@ export class CarrinhoService{
 
   adicionar(livro: Livro): void{
     const item = this.itens.find(
-      (itemCarrinho) => itemCarrinho.livro.id === livro.id);
+      (itemCarrinho) => itemCarrinho.livro.id === livro.id
+    );
 
     if(item){
       item.quantidade++;
@@ -39,7 +40,9 @@ export class CarrinhoService{
   }
 
   quantidadeTotal(): number {
-    return this.itens.reduce((total, item) => total + item.quantidade, 0);
+    return this.itens.reduce(
+      (total, item) => total + item.quantidade, 0
+    );
   }
 
   total(): number {
