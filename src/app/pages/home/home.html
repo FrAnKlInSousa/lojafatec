@@ -44,9 +44,9 @@
           <small>{{livro.categoria}}</small>
           <h3>{{livro.titulo}}</h3>
           <p class="autor">{{livro.autor}}</p>
-          <div class="d-flex justify-contetn-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <strong>{{livro.preco | currency:'BRL'}}</strong>
-            <a [routerLink]="['/produto', livro.id]" class="btn btn dark btn-sm">Ver livro</a>
+            <a [routerLink]="['/produto', livro.id]" class="btn btn-dark btn-sm">Ver livro</a>
           </div>
         </div>
       </article>
