@@ -176,3 +176,18 @@
   font-size: 1.1rem;
 }
 
+.section-heading {
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.results-count {
+  display: block;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
