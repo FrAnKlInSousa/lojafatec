@@ -1,7 +1,8 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, inject} from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CarrinhoService } from '../../services/carrinho.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -11,10 +12,16 @@ import { CarrinhoService } from '../../services/carrinho.service';
 })
 export class Carrinho {
   readonly carrinho = inject(CarrinhoService);
+  readonly authService = inject(AuthService);
+  readonly router = inject(Router)
 
   compraFinalizada = false;
 
   finalizarCompra(): void{
+    if(!this.authService.estaLogado()){
+      this.router.navigate(['/login']);
+      return;
+    }
     this.carrinho.limpar();
     this.compraFinalizada = true;
   }
