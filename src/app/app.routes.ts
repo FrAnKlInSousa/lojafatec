@@ -5,10 +5,11 @@ import { Cadastro } from './pages/cadastro/cadastro';
 import { Home } from './pages/home/home';
 import { Produto } from './pages/produto/produto';
 import { Carrinho } from './pages/carrinho/carrinho';
+import { naoAutenticadoGuard } from './guards/nao-autenticado.guard';
 
 export const routes: Routes = [
   {path: '', component: Home},
-  {path: 'login', component: Login},
+  {path: 'login', component: Login, canActivate: [naoAutenticadoGuard]},
   {path: 'recuperar-senha', component: RecuperarSenha},
   {path: 'cadastro', component: Cadastro},
   {path: 'home', component: Home},
