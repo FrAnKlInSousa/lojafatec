@@ -19,7 +19,12 @@ export class Carrinho {
 
   finalizarCompra(): void{
     if(!this.authService.estaLogado()){
-      this.router.navigate(['/login']);
+      this.router.navigate(
+        ['/login'],
+        {queryParams: {
+          retorno: '/carrinho'
+        }}
+      );
       return;
     }
     this.carrinho.limpar();

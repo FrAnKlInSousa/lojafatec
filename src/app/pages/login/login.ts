@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class Login {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   email = '';
   senha = '';
@@ -30,6 +31,8 @@ export class Login {
       return;
     }
 
-    this.router.navigate(['/']);
+    const retorno = this.route.snapshot.queryParamMap.get('retorno');
+
+    this.router.navigate([retorno || '/']);
   }
 }
