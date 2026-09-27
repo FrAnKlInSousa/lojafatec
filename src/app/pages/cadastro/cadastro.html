@@ -1,27 +1,78 @@
 <section class="auth-page">
   <div class="auth-card">
-    <span class="eyebrow">Nova conta</span>
-    <h1>Cadastrar</h1>
+
+    <div class="auth-header">
+      <span class="eyebrow">Nova conta</span>
+      <h1>Cadastrar</h1>
+      <p>Crie sua conta para começar a comprar.</p>
+    </div>
 
     <form (ngSubmit)="cadastrar()">
-      <div class="alert alert-danger"
-      *ngIf="erro">
+
+      <div
+        class="alert alert-danger"
+        *ngIf="erro"
+      >
         {{erro}}
       </div>
-      <label for="nome" class="form-label">Nome</label>
-      <input id="nome" type="text" class="form-control mb-3" [(ngModel)]="nome" name="nome">
 
-      <label for="email" class="form-label">Email</label>
-      <input id="email" type="email" class="form-control mb-3" name="email" [(ngModel)]="email">
+      <div class="mb-3">
+        <label for="nome" class="form-label">
+          Nome
+        </label>
 
-      <label for="senha" class="form-label"></label>
-      <input type="password" id="senha" class="form-control mb-3" [(ngModel)]="senha" name="senha">
+        <input
+          id="nome"
+          type="text"
+          class="form-control"
+          [(ngModel)]="nome"
+          name="nome"
+        >
+      </div>
 
-      <button class="btn btn-dark w-100" type="submit">Criar conta</button>
+      <div class="mb-3">
+        <label for="email" class="form-label">
+          E-mail
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          [(ngModel)]="email"
+          name="email"
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="senha" class="form-label">
+          Senha
+        </label>
+
+        <input
+          id="senha"
+          type="password"
+          class="form-control"
+          [(ngModel)]="senha"
+          name="senha"
+        >
+      </div>
+
+      <button
+        class="btn btn-dark w-100"
+        type="submit"
+      >
+        Criar conta
+      </button>
+
     </form>
 
-    <p class="mt-4 mb-0">Já possui cadastro?
-      <a routerLink="/login">Entrar</a>
-    </p>
+    <div class="auth-footer">
+      <span>Já possui cadastro?</span>
+      <a routerLink="/login">
+        Entrar
+      </a>
+    </div>
+
   </div>
 </section>
