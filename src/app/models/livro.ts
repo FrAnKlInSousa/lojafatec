@@ -3,7 +3,7 @@ export interface Livro {
   titulo: string;
   autor: string;
   descricao: string;
-  categoria: string;
+  categorias: string[];
   preco: number;
   capa: string;
   destaque?: boolean;

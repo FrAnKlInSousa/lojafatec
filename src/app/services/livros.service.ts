@@ -12,13 +12,23 @@ export class LivrosService{
     return LIVROS.find((livro) => livro.id === id);
   }
 
-  buscar(termo: string): Livro[] {
+  buscar(termo: string, categoria?: string): Livro[] {
     const busca = termo.trim().toLocaleLowerCase();
 
     if(!busca) return LIVROS;
-    return LIVROS.filter((livro) =>
+    return LIVROS.filter((livro) =>{
+      const textoLivroOuAutor = !busca ||
       livro.titulo.toLocaleLowerCase().includes(busca)
       ||
-      livro.autor.toLocaleLowerCase().includes(busca));
+      livro.autor.toLocaleLowerCase().includes(busca);
+
+      const textoCategoria = !categoria ||
+      livro.categorias.includes(categoria);
+
+      return textoCategoria && textoLivroOuAutor;
+
+    }
+
+    );
   }
 }

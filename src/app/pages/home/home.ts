@@ -17,6 +17,7 @@ export class Home {
 
   readonly livros = this.livrosService.listar();
   termo = '';
+  categoriaSelecionada = '';
 
   constructor(){
     this.route.queryParamMap.subscribe((params) => {
@@ -25,11 +26,20 @@ export class Home {
   }
 
   get livrosFiltrados(): Livro[] {
-    return this.livrosService.buscar(this.termo);
+    return this.livrosService.buscar(
+      this.termo,
+      this.categoriaSelecionada
+    );
   }
 
   get livrosDestaque(): Livro[]{
     return this.livros.filter((livro) => livro.destaque)
   }
-  
+
+  get categorias(): string[]{
+    return [...new Set(
+      this.livros.flatMap((livro) => livro.categorias)
+    )].sort();
+  }
+
 }
