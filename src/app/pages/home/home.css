@@ -115,3 +115,64 @@
     width: 100%;
   }
 }
+
+
+.book-card {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.book-card .cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
+  padding: 1.25rem;
+  background: #f8f9fa;
+}
+
+.book-card .cover img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.book-card:hover .cover img {
+  transform: scale(1.02);
+}
+
+.book-card small {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.book-card h3 {
+  margin-bottom: 0.35rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.book-card .autor {
+  margin-bottom: 1rem;
+  color: #6c757d;
+}
+
+.book-card strong {
+  font-size: 1.1rem;
+}
+
