@@ -14,9 +14,9 @@
 
       <div class="col-lg-5 d-none d-lg-block">
         <div class="book-stack">
-          <div class="fake-book book-one">1984</div>
-          <div class="fake-book book-two">O Hobbit</div>
-          <div class="fake-book book-three">Dom Casmurro</div>
+          <div class="fake-book book-one" *ngIf="livrosDestaque[0]">{{livrosDestaque[0].titulo}}</div>
+          <div class="fake-book book-two" *ngIf="livrosDestaque[1]">{{livrosDestaque[1].titulo}}</div>
+          <div class="fake-book book-three" *ngIf="livrosDestaque[1]">{{livrosDestaque[2].titulo}}</div>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
   <div class="row g-4">
     <div class="col-12 col-sm-6 col-lg-4" *ngFor="let livro of livrosFiltrados">
       <article class="book-card h-100">
-        <a routerLink="['/produto', livro.id]" class="cover">
+        <a [routerLink]="['/produto', livro.id]" class="cover">
           <img src="livro.capa" [alt]="'Capa de ' + livro.titulo">
         </a>
 

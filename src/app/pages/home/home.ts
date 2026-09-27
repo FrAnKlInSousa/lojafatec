@@ -27,4 +27,9 @@ export class Home {
   get livrosFiltrados(): Livro[] {
     return this.livrosService.buscar(this.termo);
   }
+
+  get livrosDestaque(): Livro[]{
+    return this.livros.filter((livro) => livro.destaque)
+  }
+  
 }
