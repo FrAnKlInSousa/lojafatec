@@ -37,7 +37,7 @@
     <div class="col-12 col-sm-6 col-lg-4" *ngFor="let livro of livrosFiltrados">
       <article class="book-card h-100">
         <a [routerLink]="['/produto', livro.id]" class="cover">
-          <img src="livro.capa" [alt]="'Capa de ' + livro.titulo">
+          <img [src]="livro.capa" [alt]="'Capa de ' + livro.titulo">
         </a>
 
         <div class="p-3">
