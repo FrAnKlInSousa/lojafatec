@@ -32,10 +32,21 @@ export class CarrinhoService{
     this.salvar();
   }
 
-  remover(livroId: number): void{
-    this.itens = this.itens.filter(
-      (item) => item.livro.id !== livroId
+  diminuirQuantidade(livroId: number): void{
+    const item = this.itens.find(
+      (itemCarrinho) => itemCarrinho.livro.id !== livroId
     );
+
+    if(!item){
+      return;
+    }
+    item.quantidade--;
+
+    if(item.quantidade === 0){
+      this.itens = this.itens.filter(
+        (itemCarrinho) => itemCarrinho.livro.id !== livroId
+      );
+    }
     this.salvar();
   }
 

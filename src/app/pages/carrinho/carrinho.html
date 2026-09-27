@@ -21,13 +21,20 @@
         <strong>
           {{ item.livro.preco * item.quantidade | currency:'BRL' }}
         </strong>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn sm btn-outline-secondary"
+            (click)="carrinho.diminuirQuantidade(item.livro.id)">
+              -
+          </button>
 
-        <button
-          class="btn btn-sm btn-outline-danger"
-          (click)="carrinho.remover(item.livro.id)"
-        >
-          Remover
-        </button>
+          <span>{{item.quantidade}}</span>
+
+            <button class="btn btn-sm btn-outline-secondary"
+              (click)="carrinho.adicionar(item.livro)"
+            >
+              +
+            </button>
+        </div>
       </article>
     </div>
 
