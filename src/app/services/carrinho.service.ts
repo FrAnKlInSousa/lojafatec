@@ -11,7 +11,8 @@ export class CarrinhoService{
   }
 
   adicionar(livro: Livro): void{
-    const item = this.itens.find((i) => i.livro.id === livro.id);
+    const item = this.itens.find(
+      (itemCarrinho) => itemCarrinho.livro.id === livro.id);
 
     if(item){
       item.quantidade++;
