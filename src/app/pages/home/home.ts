@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Livro } from '../../models/livro';
 import { LivrosService } from '../../services/livros.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
