@@ -1,0 +1,12 @@
+.navbar-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.navbar-logo path {
+  fill: none;
+  stroke: #38f6ff;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}

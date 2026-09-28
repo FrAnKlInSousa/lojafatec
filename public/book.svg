@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120">
+  <!-- Left page / cover -->
+  <path
+    d="M80 94 C63 79 43 74 18 80 V25 C43 19 63 25 80 40 Z"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="4"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+
+  <!-- Right page / cover -->
+  <path
+    d="M80 94 C97 79 117 74 142 80 V25 C117 19 97 25 80 40 Z"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="4"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+
+  <!-- Central spine -->
+  <path
+    d="M80 40 V94"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+
+  <!-- Lower cover contour -->
+  <path
+    d="M18 80 C43 75 63 81 80 96 C97 81 117 75 142 80"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="3.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Left page details -->
+  <path
+    d="M31 38 C45 35 59 39 69 46"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M30 49 C44 46 57 49 67 55"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M29 60 C43 57 55 60 65 65"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Right page details -->
+  <path
+    d="M129 38 C115 35 101 39 91 46"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M130 49 C116 46 103 49 93 55"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M131 60 C117 57 105 60 95 65"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Small page/cover accents -->
+  <path
+    d="M21 27 C42 22 61 28 77 41"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+  <path
+    d="M139 27 C118 22 99 28 83 41"
+    fill="none"
+    stroke="#38f6ff"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+</svg>
