@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Livro } from '../../models/livro';
 import { LivrosService } from '../../services/livros.service';
 
@@ -11,9 +11,10 @@ import { LivrosService } from '../../services/livros.service';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
+export class Home implements AfterViewInit {
   private readonly livrosService = inject(LivrosService);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   readonly livros = this.livrosService.listar();
   termo = '';
@@ -23,6 +24,40 @@ export class Home {
     this.route.queryParamMap.subscribe((params) => {
       this.termo = params.get('q') ?? '';
     });
+  }
+
+  ngAfterViewInit(): void {
+  const scroll = sessionStorage.getItem('home-scroll');
+
+    if (!scroll) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: Number(scroll),
+          behavior: 'instant'
+        });
+
+        sessionStorage.removeItem('home-scroll');
+      });
+    });
+  }
+
+salvarScroll(): void {
+  sessionStorage.setItem('home-scroll', String(window.scrollY));
+}
+
+  irParaProduto(id: number, origem: 'card' | 'destaque'): void {
+    this.salvarScroll();
+
+    this.router.navigate(
+      ['/produto', id],
+      {
+        state: { origem }
+      }
+    );
   }
 
   get livrosFiltrados(): Livro[] {

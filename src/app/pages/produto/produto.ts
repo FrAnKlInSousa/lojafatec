@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, inject} from '@angular/core';
+import { afterNextRender, Component, inject} from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { LivrosService } from '../../services/livros.service';
 import { CarrinhoService } from '../../services/carrinho.service';
@@ -19,6 +19,18 @@ export class Produto {
     Number(this.route.snapshot.paramMap.get('id'))
   );
   adicionadoAoCarrinho = false;
+  origem: 'card' | 'destaque' = 'card';
+
+  constructor() {
+    this.origem = history.state.origem ?? 'card';
+    
+    afterNextRender(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+    });
+  }
 
   adicionarAoCarrinho(livro: Livro): void{
     this.carrinho.adicionar(livro);

@@ -9,7 +9,11 @@
   <div class="row g-5 align-items-start mt-2">
     <div class="col-md-5">
       <div class="product-cover"
-        [style.view-transition-name]="'livro-' + item.id"
+        [style.view-transition-name]="
+          origem === 'destaque'
+            ? 'livro-destaque-' + item.id
+            : 'livro-card-' + item.id
+        "
       >
         <img [src]="item.capa" [alt]="'Capa de ' + item.titulo">
       </div>

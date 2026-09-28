@@ -47,13 +47,17 @@
           <a
             class="fake-book book-one"
             *ngIf="livrosDestaque[0]"
-            [routerLink]="['/produto', livrosDestaque[0].id]">
+            [style.view-transition-name]="'livro-destaque-' + livrosDestaque[0].id"
+            (click)="irParaProduto(livrosDestaque[0].id, 'destaque')"
+            >
             <img [src]="livrosDestaque[0].capa" [alt]="'Capa de ' + livrosDestaque[0].titulo">
           </a>
           <a
             class="fake-book book-two"
             *ngIf="livrosDestaque[1]"
-            [routerLink]="['/produto', livrosDestaque[1].id]">
+            [style.view-transition-name]="'livro-destaque-' + livrosDestaque[1].id"
+            (click)="irParaProduto(livrosDestaque[1].id, 'destaque')"
+            >
             <img
             [src]="livrosDestaque[1].capa"
             [alt]="'Capa de ' + livrosDestaque[1].titulo"
@@ -62,7 +66,9 @@
           <a
             class="fake-book book-three"
             *ngIf="livrosDestaque[2]"
-            [routerLink]="['/produto', livrosDestaque[2].id]">
+            [style.view-transition-name]="'livro-destaque-' + livrosDestaque[2].id"
+            (click)="irParaProduto(livrosDestaque[2].id, 'destaque')"
+            >
             <img
             [src]="livrosDestaque[2].capa"
             [alt]="'Capa de ' + livrosDestaque[2].titulo">
@@ -87,9 +93,11 @@
   <div class="row g-4">
     <div class="col-12 col-sm-6 col-lg-4" *ngFor="let livro of livrosFiltrados">
       <article class="book-card h-100">
-        <a [routerLink]="['/produto', livro.id]"
+        <a
+
         class="cover"
-        [style.view-transition-name]="'livro-' + livro.id"
+        [style.view-transition-name]="'livro-card-' + livro.id"
+        (click)="irParaProduto(livro.id, 'card')"
         >
           <img [src]="livro.capa" [alt]="'Capa de ' + livro.titulo">
         </a>
@@ -100,7 +108,10 @@
           <p class="autor">{{livro.autor}}</p>
           <div class="d-flex justify-content-between align-items-center">
             <strong>{{livro.preco | currency:'BRL'}}</strong>
-            <a [routerLink]="['/produto', livro.id]" class="btn btn-dark btn-sm">Ver livro</a>
+            <a
+              class="btn btn-dark btn-sm"
+              (click)="irParaProduto(livro.id, 'card')"
+            >Ver livro</a>
           </div>
         </div>
       </article>
