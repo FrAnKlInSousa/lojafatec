@@ -14,7 +14,7 @@ export class RecuperarSenha {
   mensagem = '';
 
   enviarLink(): void{
-    this.mensagem = `Se o email informado estiver cadastrado, um email com o link para recuperação de senha será enviado}.`
+    this.mensagem = `Se o email informado estiver cadastrado, um email com o link para recuperação de senha será enviado.`
     this.email = '';
   }
 }
