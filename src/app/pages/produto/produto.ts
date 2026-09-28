@@ -23,7 +23,7 @@ export class Produto {
 
   constructor() {
     this.origem = history.state.origem ?? 'card';
-    
+
     afterNextRender(() => {
       window.scrollTo({
         top: 0,
@@ -33,12 +33,11 @@ export class Produto {
   }
 
   adicionarAoCarrinho(livro: Livro): void{
+    if (this.adicionadoAoCarrinho) {
+      return;
+    }
     this.carrinho.adicionar(livro);
 
     this.adicionadoAoCarrinho = true;
-
-    setTimeout(()=>{
-      this.adicionadoAoCarrinho = false;
-    }, 2000);
   }
 }
