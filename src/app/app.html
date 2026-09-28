@@ -1,25 +1,65 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
+
     <a routerLink="/" class="navbar-brand d-flex align-items-center gap-2">
-
-      <app-logo/>
-
+      <app-logo />
       <span>Livraria</span>
     </a>
-    <div class="navbar-nav ms-auto">
-      <a routerLink="/" class="nav-link">Livros</a>
 
-      <a routerLink="/carrinho" class="nav-link">Carrinho</a>
+    <button
+      type="button"
+      class="navbar-toggler"
+      aria-label="Abrir menu"
+      [attr.aria-expanded]="menuAberto"
+      (click)="toggleMenu()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <a *ngIf="!estaLogado" routerLink="/login" class="nav-link">Entrar</a>
+    <div
+      class="navbar-collapse"
+      [class.show]="menuAberto"
+    >
+      <div class="navbar-nav ms-auto">
 
-      <a
-        *ngIf="estaLogado"
-        type="button"
-        class="nav-link btn btn-link"
-        (click)="logout()">Sair</a>
+        <a
+          routerLink="/"
+          class="nav-link"
+          (click)="menuAberto = false"
+        >
+          Livros
+        </a>
+
+        <a
+          routerLink="/carrinho"
+          class="nav-link"
+          (click)="menuAberto = false"
+        >
+          Carrinho
+        </a>
+
+        <a
+          *ngIf="!estaLogado"
+          routerLink="/login"
+          class="nav-link"
+          (click)="menuAberto = false"
+        >
+          Entrar
+        </a>
+
+        <a
+          *ngIf="estaLogado"
+          type="button"
+          class="nav-link btn btn-link"
+          (click)="logout(); menuAberto = false"
+        >
+          Sair
+        </a>
+
+      </div>
     </div>
 
   </div>
 </nav>
+
 <router-outlet />

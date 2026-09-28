@@ -15,6 +15,12 @@ export class App {
   private readonly router = inject(Router);
   protected readonly title = signal('livros');
 
+  menuAberto = false;
+
+  toggleMenu(): void{
+    this.menuAberto = !this.menuAberto;
+  }
+
   get estaLogado(): boolean{
     return this.authService.estaLogado();
   }
