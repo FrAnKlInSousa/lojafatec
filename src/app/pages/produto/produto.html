@@ -12,7 +12,9 @@
         [style.view-transition-name]="
           origem === 'destaque'
             ? 'livro-destaque-' + item.id
-            : 'livro-card-' + item.id
+            : origem === 'carrinho'
+              ? 'livro-carrinho-' + item.id
+              : 'livro-card-' + item.id
         "
       >
         <img [src]="item.capa" [alt]="'Capa de ' + item.titulo">
@@ -36,6 +38,7 @@
         </div>
 
         <button
+          type="button"
           class="btn btn-dark add-to-cart"
           [disabled]="adicionadoAoCarrinho"
           (click)="adicionarAoCarrinho(item)"

@@ -12,11 +12,18 @@
 
       <article class="cart-item" *ngFor="let item of carrinho.listar()">
 
-        <img
-          class="cart-cover"
-          [src]="item.livro.capa"
-          [alt]="item.livro.titulo"
+        <a
+          [routerLink]="['/produto', item.livro.id]"
+          [state]="{ origem: 'carrinho' }"
+          [style.view-transition-name]="'livro-carrinho-' + item.livro.id"
+          class="cart-cover-link"
         >
+          <img
+            class="cart-cover"
+            [src]="item.livro.capa"
+            [alt]="'Capa de ' + item.livro.titulo"
+          >
+        </a>
 
         <div class="cart-info">
           <h2>{{ item.livro.titulo }}</h2>

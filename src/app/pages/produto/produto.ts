@@ -19,7 +19,7 @@ export class Produto {
     Number(this.route.snapshot.paramMap.get('id'))
   );
   adicionadoAoCarrinho = false;
-  origem: 'card' | 'destaque' = 'card';
+  origem: 'card' | 'destaque' | 'carrinho' = 'card';
 
   constructor() {
     this.origem = history.state.origem ?? 'card';
