@@ -12,7 +12,11 @@ export class LivrosService{
   }
 
   listar(): Livro[] {
-    return LIVROS;
+    return [...LIVROS].sort((a, b) =>
+      a.titulo.localeCompare(b.titulo, 'pt-BR', {
+        sensitivity: 'base'
+      })
+    );
   }
 
   buscarPorId(id: number): Livro | undefined {
@@ -22,17 +26,23 @@ export class LivrosService{
   buscar(termo: string, categoria?: string): Livro[] {
     const busca = this.normalizarTexto(termo.trim());
 
-    return LIVROS.filter((livro) =>{
-      const textoLivroOuAutor =
-        !busca ||
-        this.normalizarTexto(livro.titulo).includes(busca) ||
-        this.normalizarTexto(livro.autor).includes(busca);
+    return LIVROS
+      .filter((livro) => {
+        const textoLivroOuAutor =
+          !busca ||
+          this.normalizarTexto(livro.titulo).includes(busca) ||
+          this.normalizarTexto(livro.autor).includes(busca);
 
-      const textoCategoria =
-        !categoria ||
-        livro.categorias.includes(categoria);
+        const textoCategoria =
+          !categoria ||
+          livro.categorias.includes(categoria);
 
-      return textoCategoria && textoLivroOuAutor;
-    });
+        return textoCategoria && textoLivroOuAutor;
+      })
+      .sort((a, b) =>
+        a.titulo.localeCompare(b.titulo, 'pt-BR', {
+          sensitivity: 'base'
+        })
+      );
   }
 }
