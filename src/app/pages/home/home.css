@@ -183,6 +183,7 @@
   height: 280px;
   padding: 1.25rem;
   background: #f8f9fa;
+  cursor: pointer;
 }
 
 .book-card .cover img {
