@@ -3,13 +3,12 @@ import { Livro } from "../models/livro";
 export const LIVROS: Livro[] = [
   {
     id: 1,
-    titulo: 'Mulher em queda',
-    autor: 'Colleen Hoover',
-    descricao: 'Petra Rose já arrebatou multidões e dominou as listas de livros mais vendidos. Mas, após a reação devastadora a uma adaptação de uma de suas obras, ela perdeu tudo: credibilidade, público e até a vontade de escrever. O ódio viral da internet a transformou em alvo fácil, e cada página em branco é mais um lembrete de que sua carreira pode estar chegando ao fim. Desesperada para se reerguer, Petra se refugia em uma cabana à beira de um lago, determinada a concluir o suspense que pode salvar sua vida profissional. Só que ela não vai ficar sozinha por muito tempo. Nathaniel Saint, um detetive misterioso, surge com notícias perturbadoras ― o que desperta em Petra uma criatividade feroz, quase obsessiva. Conforme suas palavras ganham vida, a fronteira entre ficção e realidade começa a se dissolver. O personagem escrito por ela não apenas se assemelha demais com o homem que a inspira… como também parece estar assumindo o controle da história. Cada conversa, cada toque, cada segredo compartilhado intensifica a conexão entre eles. Mas a inspiração tem um preço, e Petra logo percebe que o caos que trouxe de volta sua voz pode também destruí-la. O que é real? O que é invenção? E até onde uma escritora está disposta a ir para recuperar a própria narrativa?',
-    categorias: ['Romance'],
-    preco: 34.10,
-    capa: '/images/livros/mulher-em-queda.jpg',
-    destaque: false
+    titulo: 'O símbolo perdido',
+    autor: 'Dan Brown',
+    descricao: 'Robert Langdon, o célebre simbologista de Harvard, é convidado por seu amigo e mentor Peter Solomon – eminente maçom e filantropo – a dar uma palestra no Capitólio dos Estados Unidos. Ao chegar lá, descobre que caiu numa armadilha: não há palestra, Solomon está desaparecido e, ao que parece, correndo perigo. Mal’akh, o sequestrador, acredita que os fundadores de Washington, a maioria deles mestres maçons, esconderam na cidade um tesouro capaz de dar poderes sobre-humanos a quem o encontrasse. E está convencido de que Langdon é o único que pode localizá-lo. Vendo que essa é sua única chance de salvar Solomon, o simbologista percorre o Capitólio, a Biblioteca do Congresso, a Catedral Nacional e o Centro de Apoio dos Museus Smithsonian. Nesse labirinto de códigos maçônicos e símbolos escondidos, Langdon conta com a ajuda de Katherine, irmã de Peter e renomada cientista. O tempo está contra eles. E muitas outras pessoas parecem envolvidas nesta trama que ameaça a segurança nacional, entre elas a diretora do Escritório de Segurança da CIA e o supervisor do Capitólio.',
+    categorias: ['Ficção'],
+    preco: 65.73,
+    capa: '/images/livros/o-simbolo-perdido.jpg',
   },
   {
     id: 2,
@@ -88,15 +87,17 @@ export const LIVROS: Livro[] = [
     preco: 43.00,
     capa: '/images/livros/o-diario-de-anne-frank.jpg',
   },
-  {
+    {
     id: 10,
-    titulo: 'O símbolo perdido',
-    autor: 'Dan Brown',
-    descricao: 'Robert Langdon, o célebre simbologista de Harvard, é convidado por seu amigo e mentor Peter Solomon – eminente maçom e filantropo – a dar uma palestra no Capitólio dos Estados Unidos. Ao chegar lá, descobre que caiu numa armadilha: não há palestra, Solomon está desaparecido e, ao que parece, correndo perigo. Mal’akh, o sequestrador, acredita que os fundadores de Washington, a maioria deles mestres maçons, esconderam na cidade um tesouro capaz de dar poderes sobre-humanos a quem o encontrasse. E está convencido de que Langdon é o único que pode localizá-lo. Vendo que essa é sua única chance de salvar Solomon, o simbologista percorre o Capitólio, a Biblioteca do Congresso, a Catedral Nacional e o Centro de Apoio dos Museus Smithsonian. Nesse labirinto de códigos maçônicos e símbolos escondidos, Langdon conta com a ajuda de Katherine, irmã de Peter e renomada cientista. O tempo está contra eles. E muitas outras pessoas parecem envolvidas nesta trama que ameaça a segurança nacional, entre elas a diretora do Escritório de Segurança da CIA e o supervisor do Capitólio.',
-    categorias: ['Ficção'],
-    preco: 65.73,
-    capa: '/images/livros/o-simbolo-perdido.jpg',
+    titulo: 'Mulher em queda',
+    autor: 'Colleen Hoover',
+    descricao: 'Petra Rose já arrebatou multidões e dominou as listas de livros mais vendidos. Mas, após a reação devastadora a uma adaptação de uma de suas obras, ela perdeu tudo: credibilidade, público e até a vontade de escrever. O ódio viral da internet a transformou em alvo fácil, e cada página em branco é mais um lembrete de que sua carreira pode estar chegando ao fim. Desesperada para se reerguer, Petra se refugia em uma cabana à beira de um lago, determinada a concluir o suspense que pode salvar sua vida profissional. Só que ela não vai ficar sozinha por muito tempo. Nathaniel Saint, um detetive misterioso, surge com notícias perturbadoras ― o que desperta em Petra uma criatividade feroz, quase obsessiva. Conforme suas palavras ganham vida, a fronteira entre ficção e realidade começa a se dissolver. O personagem escrito por ela não apenas se assemelha demais com o homem que a inspira… como também parece estar assumindo o controle da história. Cada conversa, cada toque, cada segredo compartilhado intensifica a conexão entre eles. Mas a inspiração tem um preço, e Petra logo percebe que o caos que trouxe de volta sua voz pode também destruí-la. O que é real? O que é invenção? E até onde uma escritora está disposta a ir para recuperar a própria narrativa?',
+    categorias: ['Romance'],
+    preco: 34.10,
+    capa: '/images/livros/mulher-em-queda.jpg',
+    destaque: false
   },
+
     {
     id: 11,
     titulo: 'Anjos e demônios',
