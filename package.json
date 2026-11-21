@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:back": "cd lojinha && bash ./mvnw -f pom.xml spring-boot:run",
+    "popular:livros": "node scripts/popular-livros.cjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

@@ -1,0 +1,74 @@
+.order-card {
+  padding: 1.5rem;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.order-card h2,
+.empty-orders h2 {
+  font-size: 1.3rem;
+}
+
+.order-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.order-status-delivered {
+  color: #146c43;
+  background: #d1e7dd;
+}
+
+.order-status-transit {
+  color: #084298;
+  background: #cfe2ff;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.order-item-cover {
+  flex: 0 0 52px;
+  width: 52px;
+  height: 72px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: #f4f1eb;
+}
+
+.order-item-title {
+  flex: 1;
+}
+
+.delivery-confirmation-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(15, 18, 20, 0.55);
+}
+
+.delivery-confirmation-dialog {
+  width: min(100%, 440px);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25);
+}
+
+.delivery-confirmation-dialog h2 {
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+}

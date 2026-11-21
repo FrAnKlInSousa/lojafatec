@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Column;
 
 @Entity
 public class Pedido {
@@ -20,6 +21,9 @@ public class Pedido {
     private String obs;
     private Date dataPedido;
     private int codigoCliente;
+    private String status;
+    @Column(columnDefinition = "TEXT")
+    private String itens;
   /*   @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, 
         orphanRemoval =  true)
     private List<ItemPedido> itens = new ArrayList<>();
@@ -60,6 +64,10 @@ public class Pedido {
     public void setCodigoCliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public String getItens() { return itens; }
+    public void setItens(String itens) { this.itens = itens; }
   /* 
     public List<ItemPedido> getItens() {
         return itens;

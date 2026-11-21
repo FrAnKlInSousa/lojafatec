@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -18,21 +19,29 @@ export class Login {
   email = '';
   senha = '';
 
-  erro = '';
+  erro = signal('');
+  entrando = signal(false);
+  senhaAlterada = this.route.snapshot.queryParamMap.get('senhaAlterada') === '1';
 
   entrar(): void {
-    const sucesso = this.authService.login(
+    this.erro.set('');
+    this.entrando.set(true);
+    this.authService.login(
       this.email,
       this.senha
-    );
+    ).pipe(finalize(() => this.entrando.set(false))).subscribe({
+      next: (sucesso) => {
+        if (!sucesso) {
+          this.erro.set('Email ou senha inválidos.');
+          return;
+        }
 
-    if(!sucesso){
-      this.erro = 'Email ou senha inválidos.';
-      return;
-    }
-
-    const retorno = this.route.snapshot.queryParamMap.get('retorno');
-
-    this.router.navigate([retorno || '/']);
+        const retorno = this.route.snapshot.queryParamMap.get('retorno');
+        this.router.navigate([retorno || '/']);
+      },
+      error: () => {
+        this.erro.set('Não foi possível conectar ao back-end. Tente novamente.');
+      },
+    });
   }
 }

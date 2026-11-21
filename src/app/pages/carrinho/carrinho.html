@@ -55,7 +55,7 @@
         </div>
 
         <strong class="cart-price">
-          {{ item.livro.preco * item.quantidade | currency:'BRL' }}
+          {{ carrinho.precoUnitario(item.livro) * item.quantidade | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
         </strong>
 
       </article>
@@ -68,23 +68,44 @@
 
         <div class="d-flex justify-content-between">
           <span>Subtotal</span>
-          <strong>{{ carrinho.total() | currency:'BRL' }}</strong>
+          <strong>{{ carrinho.total() | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
         </div>
+
+        <hr>
+        <h3 class="h5">Endereço de entrega</h3>
+        <div class="form-check mb-3" *ngIf="authService.usuarioAtual()?.logradouro as perfil">
+          <input class="form-check-input" type="checkbox" name="enderecoNovo" id="enderecoNovo" [ngModel]="digitarOutroEndereco" (ngModelChange)="alternarEndereco($event)">
+          <label class="form-check-label" for="enderecoNovo">Informar outro endereço</label>
+          <small class="d-block text-muted" *ngIf="!digitarOutroEndereco">Usando: {{ perfil.rua }}, {{ perfil.numero }}, {{ perfil.cidade }}/{{ perfil.estado }}</small>
+        </div>
+        <div *ngIf="digitarOutroEndereco" class="row g-2 mb-3">
+          <div class="col-8"><input class="form-control" name="ruaEntrega" placeholder="Rua" [(ngModel)]="enderecoEntrega.rua" required></div>
+          <div class="col-4"><input class="form-control" name="numeroEntrega" placeholder="Número" [(ngModel)]="enderecoEntrega.numero" required></div>
+          <div class="col-6"><input class="form-control" name="complementoEntrega" placeholder="Complemento" [(ngModel)]="enderecoEntrega.complemento"></div>
+          <div class="col-6"><input class="form-control" name="cepEntrega" placeholder="CEP" [ngModel]="enderecoEntrega.cep" (ngModelChange)="enderecoEntrega.cep = mascararCep($event)" (keydown)="bloquearCaractereNaoNumerico($event)" inputmode="numeric" maxlength="9" required></div>
+          <div class="col-6"><input class="form-control" name="bairroEntrega" placeholder="Bairro" [(ngModel)]="enderecoEntrega.bairro" required></div>
+          <div class="col-6"><input class="form-control" name="cidadeEntrega" placeholder="Cidade" [(ngModel)]="enderecoEntrega.cidade" required></div>
+          <div class="col-4"><input class="form-control" name="estadoEntrega" placeholder="UF" maxlength="2" [(ngModel)]="enderecoEntrega.estado" required></div>
+        </div>
+
+        <p *ngIf="erroPedido" class="alert alert-danger">{{ erroPedido }}</p>
 
         <hr>
 
         <button
           class="btn btn-dark w-100"
           (click)="finalizarCompra()"
+          [disabled]="salvandoPedido"
         >
-          Finalizar compra
+          {{ salvandoPedido ? 'Registrando pedido...' : 'Finalizar compra' }}
         </button>
       </aside>
     </div>
   </div>
 
   <ng-template #vazio>
-    <div class="empty">
+    <p *ngIf="carrinho.carregando()" class="text-muted">Carregando seu carrinho...</p>
+    <div class="empty" *ngIf="!carrinho.carregando()">
       <h2>Seu carrinho está vazio.</h2>
       <p>Que tal encontrar uma nova história?</p>
       <a routerLink="/" class="btn btn-dark">
@@ -98,12 +119,13 @@
   class="container py-5 text-center"
   *ngIf="compraFinalizada"
 >
-  <h1>Compra realizada com sucesso!</h1>
+  <h1>Pedido registrado com sucesso!</h1>
 
   <p class="mt-3">
-    Obrigado pela sua compra.
+    Acompanhe o status na opção “Meus pedidos”.
   </p>
 
+  <a routerLink="/pedidos" class="btn btn-outline-dark mt-3 me-2">Ver meus pedidos</a>
   <a routerLink="/" class="btn btn-dark mt-3">
     Voltar para a loja
   </a>

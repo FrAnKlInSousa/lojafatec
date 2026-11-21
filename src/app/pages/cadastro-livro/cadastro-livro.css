@@ -1,0 +1,10 @@
+.formulario {
+  max-width: 680px;
+}
+
+.preview-capa {
+  display: block;
+  max-width: 180px;
+  max-height: 240px;
+  object-fit: contain;
+}

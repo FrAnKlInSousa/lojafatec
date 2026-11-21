@@ -34,7 +34,7 @@
                 *ngFor="let categoria of categorias"
                 [value]="categoria"
               >
-                {{ categoria }}
+                {{ livrosService.formatarCategoria(categoria) }}
               </option>
             </select>
           </div>
@@ -50,7 +50,7 @@
             [style.view-transition-name]="'livro-destaque-' + livrosDestaque[0].id"
             (click)="irParaProduto(livrosDestaque[0].id, 'destaque')"
             >
-            <img [src]="livrosDestaque[0].capa" [alt]="'Capa de ' + livrosDestaque[0].titulo">
+            <img [src]="livrosDestaque[0].capa" [alt]="'Capa de ' + livrosDestaque[0].titulo" (error)="usarCapaPadrao($event.target)">
           </a>
           <a
             class="fake-book book-two"
@@ -61,6 +61,7 @@
             <img
             [src]="livrosDestaque[1].capa"
             [alt]="'Capa de ' + livrosDestaque[1].titulo"
+            (error)="usarCapaPadrao($event.target)"
             >
           </a>
           <a
@@ -71,7 +72,8 @@
             >
             <img
             [src]="livrosDestaque[2].capa"
-            [alt]="'Capa de ' + livrosDestaque[2].titulo">
+            [alt]="'Capa de ' + livrosDestaque[2].titulo"
+            (error)="usarCapaPadrao($event.target)">
           </a>
         </div>
       </div>
@@ -81,12 +83,14 @@
 
 <section class="container py-5">
 
+  <p class="alert alert-warning" role="status" *ngIf="erroCatalogo()">{{ erroCatalogo() }}</p>
+
   <div class="section-heading">
 
     <h2>Explore nossos livros</h2>
 
     <span class="results-count">
-      {{ livrosFiltrados.length }} livros encontrados
+      {{ livrosFiltrados.length }} {{ livrosFiltrados.length < 2 ? 'livro encontrado' : 'livros encontrados' }}
     </span>
   </div>
 
@@ -99,22 +103,61 @@
         [style.view-transition-name]="'livro-card-' + livro.id"
         (click)="irParaProduto(livro.id, 'card')"
         >
-          <img [src]="livro.capa" [alt]="'Capa de ' + livro.titulo">
+          <img [src]="livro.capa" [alt]="'Capa de ' + livro.titulo" (error)="usarCapaPadrao($event.target)">
         </a>
 
         <div class="p-3">
-          <small>{{livro.categorias.join(' • ')}}</small>
+          <small>{{livrosService.formatarCategorias(livro.categorias)}}</small>
           <h3>{{livro.titulo}}</h3>
           <p class="autor">{{livro.autor}}</p>
           <div class="d-flex justify-content-between align-items-center">
-            <strong>{{livro.preco | currency:'BRL'}}</strong>
+            <strong *ngIf="livro.precoPromocional && livro.precoPromocional > 0; else precoNormal">
+              <del class="preco-original">{{livro.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</del>
+              {{livro.precoPromocional | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}
+            </strong>
+            <ng-template #precoNormal>
+              <strong>{{livro.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</strong>
+            </ng-template>
+            <div class="d-flex gap-2 align-items-center">
             <a
               class="btn btn-dark btn-sm"
               (click)="irParaProduto(livro.id, 'card')"
             >Ver livro</a>
+            <button
+              *ngIf="authService.usuarioAtual()?.tipo === 'god'"
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              (click)="excluirLivro(livro)"
+              aria-label="Excluir livro"
+            ><i class="bi bi-trash"></i></button>
+            </div>
           </div>
         </div>
       </article>
     </div>
   </div>
 </section>
+
+<div
+  class="delete-confirmation-backdrop"
+  *ngIf="livroParaExcluir as livro"
+  (click)="fecharConfirmacaoExclusao()"
+>
+  <section
+    class="delete-confirmation-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmar-exclusao-titulo"
+    (click)="$event.stopPropagation()"
+  >
+    <h2 id="confirmar-exclusao-titulo">Excluir livro</h2>
+    <p>Tem certeza de que deseja excluir <strong>{{ livro.titulo }}</strong>?</p>
+    <p *ngIf="erroExclusao" class="alert alert-danger" role="alert">{{ erroExclusao }}</p>
+    <div class="d-flex justify-content-end gap-2">
+      <button type="button" class="btn btn-outline-secondary" (click)="fecharConfirmacaoExclusao()" [disabled]="excluindoLivro">Cancelar</button>
+      <button type="button" class="btn btn-danger" (click)="confirmarExclusao()" [disabled]="excluindoLivro">
+        {{ excluindoLivro ? 'Excluindo...' : 'Excluir livro' }}
+      </button>
+    </div>
+  </section>
+</div>

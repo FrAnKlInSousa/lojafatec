@@ -31,12 +31,36 @@
         </a>
 
         <a
+          *ngIf="authService.usuarioAtual()?.tipo !== 'god'"
           routerLink="/carrinho"
           class="nav-link"
           (click)="menuAberto = false"
         >
           Carrinho
         </a>
+
+        <a
+          *ngIf="ehGod"
+          routerLink="/cadastro-livro"
+          class="nav-link"
+          (click)="menuAberto = false"
+        >
+          Cadastrar livro
+        </a>
+
+        <a
+          *ngIf="estaLogado && authService.usuarioAtual()?.tipo !== 'god'"
+          routerLink="/pedidos"
+          class="nav-link"
+          (click)="menuAberto = false"
+        >Meus pedidos</a>
+
+        <a
+          *ngIf="estaLogado && authService.usuarioAtual()?.tipo !== 'god'"
+          routerLink="/perfil"
+          class="nav-link"
+          (click)="menuAberto = false"
+        >Perfil</a>
 
         <a
           *ngIf="!estaLogado"

@@ -56,7 +56,8 @@ export const LIVROS: Livro[] = [
     autor: 'Dan Brown',
     descricao: 'Não importa quem você seja nem no que acredite. Tudo está prestes a mudar. Robert Langdon, o famoso professor de Simbologia de Harvard, chega ao ultramoderno Museu Guggenheim de Bilbao para assistir a uma apresentação sobre uma grande descoberta que promete abalar os alicerces de todas as religiões e mudar para sempre a face da ciência. O anfitrião é o futurólogo e bilionário Edmond Kirsch. O brilhante ex-aluno de Langdon está prestes a revelar uma incrível revolução no conhecimento, algo que vai responder a duas perguntas fundamentais da existência humana:DE ONDE VIEMOS? PARA ONDE VAMOS? Langdon logo percebe que a apresentação será muito mais controversa do que poderia imaginar. De repente, a noite se transforma em caos, e a preciosa descoberta de Kirsch corre o risco de ser perdida para sempre. Diante de uma ameaça iminente, Langdon tenta uma fuga desesperada de Bilbao ao lado de Ambra Vidal, a diretora do museu. Juntos, eles seguem para Barcelona à procura de uma senha que ajudará a desvendar o segredo de Edmond Kirsch. Em meio a fatos históricos ocultos e extremismo religioso, Robert e Ambra precisam escapar de um inimigo onisciente cujo poder parece emanar do Palácio Real da Espanha. Alguém que não hesitará diante de nada para silenciar o futurólogo. Numa jornada marcada por obras de arte moderna e símbolos enigmáticos, os dois encontram pistas que vão deixá-los cara a cara com a chocante revelação de Kirsch e com a verdade espantosa que ignoramos durante tanto tempo.',
     categorias: ['Ficção', 'Aventura'],
-    preco: 24.90,
+    preco: 54.90,
+    precoPromocional: 24.90,
     capa: '/images/livros/origem.jpg',
   },
   {
@@ -122,7 +123,8 @@ export const LIVROS: Livro[] = [
     autor: 'Agatha Christie',
     descricao: 'Uma ilha misteriosa, um poema infantil, dez soldadinhos de porcelana e muito suspense são os ingredientes com que Agatha Christie constrói seu romance mais importante. Na ilha do Soldado, antiga propriedade de um milionário norte-americano, dez pessoas sem nenhuma ligação aparente são confrontadas por uma voz misteriosa com fatos marcantes de seus passados. Convidados pelo misterioso mr. Owen, nenhum dos presentes tem muita certeza de por que estão ali, a despeito de conjecturas pouco convincentes que os leva a crer que passariam um agradável período de descanso em mordomia. Entretanto, já na primeira noite, o mistério e o suspense se abatem sobre eles e, num instante, todos são suspeitos, todos são vítimas e todos são culpados. É neste clima de tensão e desconforto que as mortes inexplicáveis começam e, sem comunicação com o continente devido a uma forte tempestade, a estadia transforma-se em um pesadelo. Todos se perguntam: quem é o misterioso anfitrião, mr. Owen? Existe mais alguém na ilha? O assassino pode ser um dos convidados? Que mente ardilosa teria preparado um crime tão complexo? E, sobretudo, por quê? São essas e outras perguntas que o leitor será desafiado a resolver neste fabuloso romance de Agatha Christie, que envolve os espíritos mais perspicazes num complexo emaranhado de situações, lembranças e acusações na busca deste sagaz assassino. Medo, confinamento e angústia: que o leitor descubra por si mesmo porque E não sobrou nenhum foi eleito o melhor romance policial de todos os tempos.',
     categorias: ['Policial crime', 'Suspense', 'Mistério'],
-    preco: 15.00,
+    preco: 34.00,
+    precoPromocional: 20.00,
     capa: '/images/livros/e-nao-sobrou-nenhum.jpg',
   },
   {

@@ -11,7 +11,7 @@ import { Logo } from './components/logo/logo';
   styleUrl: './app.css',
 })
 export class App {
-  private readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   protected readonly title = signal('livros');
 
@@ -23,6 +23,10 @@ export class App {
 
   get estaLogado(): boolean{
     return this.authService.estaLogado();
+  }
+
+  get ehGod(): boolean {
+    return this.authService.usuarioAtual()?.tipo === 'god';
   }
 
   logout(): void{

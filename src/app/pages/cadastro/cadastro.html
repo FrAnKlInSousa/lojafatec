@@ -7,7 +7,7 @@
       <p>Crie sua conta para começar a comprar.</p>
     </div>
 
-    <form (ngSubmit)="cadastrar()">
+    <form #cadastroForm="ngForm" (ngSubmit)="cadastrar()">
 
       <div
         class="alert alert-danger"
@@ -27,6 +27,8 @@
           class="form-control"
           [(ngModel)]="nome"
           name="nome"
+          autocomplete="name"
+          required
         >
       </div>
 
@@ -39,10 +41,13 @@
           id="email"
           type="email"
           class="form-control"
-          [(ngModel)]="email"
+          [class.is-invalid]="email.length > 0 && !cadastroEmailValido"
+          [ngModel]="email"
+          (ngModelChange)="email = $event"
           name="email"
           required
         >
+        <div class="invalid-feedback" *ngIf="email.length > 0 && !cadastroEmailValido">Informe um e-mail válido, como nome&#64;exemplo.com.</div>
       </div>
 
       <div class="mb-3">
@@ -54,16 +59,74 @@
           id="senha"
           type="password"
           class="form-control"
+          [class.is-invalid]="senha.length > 0 && !senhaValida"
           [(ngModel)]="senha"
           name="senha"
+          autocomplete="new-password"
+          minlength="6"
+          required
         >
+        <div class="invalid-feedback" *ngIf="senha.length > 0 && !senhaValida">A senha precisa ter pelo menos 6 caracteres.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="confirmarSenha" class="form-label">Confirmar senha</label>
+        <input id="confirmarSenha" type="password" class="form-control" [class.is-invalid]="confirmarSenha.length > 0 && !confirmacaoSenhaValida" [(ngModel)]="confirmarSenha" name="confirmarSenha" autocomplete="new-password" required>
+        <div class="invalid-feedback" *ngIf="confirmarSenha.length > 0 && !confirmacaoSenhaValida">As senhas informadas não são iguais.</div>
+      </div>
+
+      <div class="row g-2">
+        <div class="col-md-6 mb-3">
+          <label for="documento" class="form-label">CPF</label>
+          <input id="documento" type="text" class="form-control" [class.is-invalid]="documento.length > 0 && !cadastroCpfValido" [ngModel]="documento" (ngModelChange)="documento = mascararCpf($event)" (keydown)="bloquearCaractereNaoNumerico($event)" name="documento" autocomplete="off" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required>
+          <div class="invalid-feedback" *ngIf="documento.length > 0 && !cadastroCpfValido">Informe um CPF válido.</div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input id="telefone" type="tel" class="form-control" [class.is-invalid]="telefone.length > 0 && !cadastroTelefoneValido" [ngModel]="telefone" (ngModelChange)="telefone = mascararTelefone($event)" (keydown)="bloquearCaractereNaoNumerico($event)" name="telefone" autocomplete="tel" inputmode="tel" maxlength="15" placeholder="(11) 99999-9999" required>
+          <div class="invalid-feedback" *ngIf="telefone.length > 0 && !cadastroTelefoneValido">Informe um telefone válido com DDD.</div>
+        </div>
+      </div>
+
+      <h2 class="h6 mt-2">Endereço</h2>
+      <div class="row g-2">
+        <div class="col-md-8 mb-3">
+          <label for="rua" class="form-label">Rua</label>
+          <input id="rua" type="text" class="form-control" [(ngModel)]="logradouro.rua" name="rua" autocomplete="address-line1" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="numero" class="form-label">Número</label>
+          <input id="numero" type="text" class="form-control" [(ngModel)]="logradouro.numero" name="numero" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="complemento" class="form-label">Complemento</label>
+          <input id="complemento" type="text" class="form-control" [(ngModel)]="logradouro.complemento" name="complemento" autocomplete="address-line2">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="cep" class="form-label">CEP</label>
+          <input id="cep" type="text" class="form-control" [class.is-invalid]="logradouro.cep.length > 0 && !cepValido(logradouro.cep)" [ngModel]="logradouro.cep" (ngModelChange)="logradouro.cep = mascararCep($event)" (keydown)="bloquearCaractereNaoNumerico($event)" name="cep" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="00000-000" required>
+          <div class="invalid-feedback" *ngIf="logradouro.cep.length > 0 && !cepValido(logradouro.cep)">Informe um CEP válido.</div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input id="bairro" type="text" class="form-control" [(ngModel)]="logradouro.bairro" name="bairro" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="cidade" class="form-label">Cidade</label>
+          <input id="cidade" type="text" class="form-control" [(ngModel)]="logradouro.cidade" name="cidade" autocomplete="address-level2" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="estado" class="form-label">Estado (UF)</label>
+          <input id="estado" type="text" class="form-control" [(ngModel)]="logradouro.estado" name="estado" maxlength="2" autocomplete="address-level1" required>
+        </div>
       </div>
 
       <button
         class="btn btn-dark w-100"
         type="submit"
+        [disabled]="cadastrando || cadastroForm.invalid || !cadastroValido"
       >
-        Criar conta
+        {{ cadastrando ? 'Salvando...' : 'Criar conta' }}
       </button>
 
     </form>

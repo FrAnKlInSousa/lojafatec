@@ -1,0 +1,47 @@
+<main class="container py-5">
+  <div class="formulario mx-auto">
+    <h1 class="mb-4">Cadastrar livro</h1>
+
+    <div *ngIf="erro" class="alert alert-danger" role="alert">{{ erro }}</div>
+
+    <form (ngSubmit)="salvar()">
+      <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input id="titulo" name="titulo" class="form-control" [(ngModel)]="titulo" required>
+      </div>
+      <div class="mb-3">
+        <label for="autor" class="form-label">Autor</label>
+        <input id="autor" name="autor" class="form-control" [(ngModel)]="autor" required>
+      </div>
+      <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea id="descricao" name="descricao" class="form-control" rows="4" [(ngModel)]="descricao" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="categorias" class="form-label">Categorias (separadas por vírgula)</label>
+        <input id="categorias" name="categorias" class="form-control" [(ngModel)]="categorias" placeholder="Romance, Fantasia" required>
+      </div>
+      <div class="mb-3">
+        <label for="preco" class="form-label">Preço</label>
+        <input id="preco" name="preco" type="text" inputmode="decimal" class="form-control" [(ngModel)]="preco" placeholder="33,88" required>
+      </div>
+      <div class="mb-3">
+        <label for="precoPromocional" class="form-label">Preço promocional (opcional)</label>
+        <input id="precoPromocional" name="precoPromocional" type="text" inputmode="decimal" class="form-control" [(ngModel)]="precoPromocional" placeholder="0,00">
+      </div>
+      <div class="mb-3">
+        <label for="capa" class="form-label">Imagem da capa (JPG ou PNG, até 4 MB)</label>
+        <input id="capa" name="capa" type="file" accept="image/jpeg,image/png" class="form-control" (change)="selecionarCapa($event)" required>
+        <small *ngIf="nomeArquivoCapa" class="form-text">{{ nomeArquivoCapa }}</small>
+        <img *ngIf="capa" [src]="capa" alt="Prévia da capa do livro" class="preview-capa mt-3">
+      </div>
+      <div class="form-check mb-4">
+        <input id="destaque" name="destaque" type="checkbox" class="form-check-input" [(ngModel)]="destaque">
+        <label for="destaque" class="form-check-label">Exibir como destaque</label>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="salvando">
+        {{ salvando ? 'Salvando...' : 'Cadastrar livro' }}
+      </button>
+    </form>
+  </div>
+</main>

@@ -1,6 +1,13 @@
+import { Logradouro } from './logradouro';
+
 export interface Usuario {
-  id: number;
+  codigo: number;
   nome: string;
   email: string;
   senha: string;
+  ativo: boolean;
+  documento: string;
+  logradouro: Logradouro;
+  telefone: string;
+  tipo: 'god' | 'human';
 }

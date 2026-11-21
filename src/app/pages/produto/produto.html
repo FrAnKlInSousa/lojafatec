@@ -24,7 +24,7 @@
     <div class="col-md-7">
       <div class="product-info">
         <small class="category">
-          {{item.categorias.join(' • ')}}
+          {{livrosService.formatarCategorias(item.categorias)}}
         </small>
 
         <h1>{{item.titulo}}</h1>
@@ -34,13 +34,18 @@
         </p>
 
         <div class="price">
-          {{item.preco | currency:'BRL'}}
+          <ng-container *ngIf="item.precoPromocional && item.precoPromocional > 0; else precoNormal">
+            <del class="preco-original">{{item.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</del>
+            <strong>{{item.precoPromocional | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</strong>
+          </ng-container>
+          <ng-template #precoNormal>{{item.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</ng-template>
         </div>
 
         <button
+          *ngIf="authService.usuarioAtual()?.tipo === 'human'"
           type="button"
           class="btn btn-dark add-to-cart"
-          [disabled]="adicionadoAoCarrinho"
+          [disabled]="adicionadoAoCarrinho || carrinho.carregando()"
           (click)="adicionarAoCarrinho(item)"
         >
           <span *ngIf="!adicionadoAoCarrinho">
@@ -76,7 +81,10 @@
 </section>
 
 <section class="container py-5" *ngIf="!livro">
-  <h1>Livro não encontrado</h1>
+  <p *ngIf="carregando">Carregando produto...</p>
+  <ng-container *ngIf="!carregando">
+  <h1>{{ erroProduto || 'Produto não encontrado' }}</h1>
   <a routerLink="/" class="btn btn-dark">Voltar para a loja</a>
+  </ng-container>
 
 </section>

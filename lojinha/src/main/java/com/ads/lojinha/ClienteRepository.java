@@ -12,7 +12,16 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
-    @Query(value = "select * from cliente where ativo=1 and email=:email and senha=:senha", nativeQuery = true)
+    boolean existsByEmailIgnoreCase(String email);
+    boolean existsByEmailIgnoreCaseAndCodigoNot(String email, int codigo);
+
+    @Query(value = "select exists(select 1 from cliente where replace(replace(replace(replace(replace(replace(documento, '.', ''), '-', ''), ' ', ''), '(', ''), ')', ''), '/', '') = :documento)", nativeQuery = true)
+    int existeDocumentoNormalizado(String documento);
+
+    @Query(value = "select exists(select 1 from cliente where replace(replace(replace(replace(replace(replace(documento, '.', ''), '-', ''), ' ', ''), '(', ''), ')', ''), '/', '') = :documento and codigo <> :codigo)", nativeQuery = true)
+    int existeDocumentoNormalizadoDeOutroCliente(String documento, int codigo);
+
+    @Query(value = "select * from cliente where ativo=1 and lower(email)=lower(:email) and senha=:senha", nativeQuery = true)
     public Optional<Cliente> fazerLogin(String email, String senha);
 
     @Modifying

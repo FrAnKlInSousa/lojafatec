@@ -17,6 +17,7 @@ public class Cliente {
     private String logradouro;
     private String email;
     private int ativo;
+    private String tipo;
     
     public int getCodigo() {
         return codigo;
@@ -65,6 +66,12 @@ public class Cliente {
     }
     public void setAtivo(int ativo) {
         this.ativo = ativo;
+    }
+    public String getTipo() {
+        return tipo;
+    }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
     

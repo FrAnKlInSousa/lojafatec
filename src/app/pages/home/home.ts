@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Livro } from '../../models/livro';
 import { LivrosService } from '../../services/livros.service';
+import { AuthService } from '../../services/auth.service';
+import { CAPA_PADRAO } from '../../services/livros.service';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +14,37 @@ import { LivrosService } from '../../services/livros.service';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements AfterViewInit {
-  private readonly livrosService = inject(LivrosService);
+export class Home implements AfterViewInit, OnInit {
+  readonly livrosService = inject(LivrosService);
+  readonly authService = inject(AuthService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly changeDetector = inject(ChangeDetectorRef);
 
-  readonly livros = this.livrosService.listar();
+  livros = signal<Livro[]>([]);
+  erroCatalogo = signal('');
   termo = '';
   categoriaSelecionada = '';
+  livroParaExcluir: Livro | null = null;
+  erroExclusao = '';
+  excluindoLivro = false;
 
   constructor(){
     this.route.queryParamMap.subscribe((params) => {
       this.termo = params.get('q') ?? '';
+    });
+  }
+
+  ngOnInit(): void {
+    this.livrosService.listarDoBackend().subscribe({
+      next: (livros) => {
+        this.livros.set(livros);
+        this.erroCatalogo.set('');
+      },
+      error: () => {
+        this.livros.set([]);
+        this.erroCatalogo.set('Não foi possível conectar ao back-end. O catálogo ficará disponível quando a API estiver ligada.');
+      },
     });
   }
 
@@ -60,20 +82,58 @@ salvarScroll(): void {
     );
   }
 
+  excluirLivro(livro: Livro): void {
+    if (this.authService.usuarioAtual()?.tipo !== 'god') return;
+    this.livroParaExcluir = livro;
+    this.erroExclusao = '';
+  }
+
+  confirmarExclusao(): void {
+    const livro = this.livroParaExcluir;
+    if (!livro || this.excluindoLivro || this.authService.usuarioAtual()?.tipo !== 'god') return;
+
+    this.excluindoLivro = true;
+    this.erroExclusao = '';
+    this.livrosService.excluir(livro.id).subscribe({
+      next: () => {
+        this.livros.update((itens) => itens.filter((item) => item.id !== livro.id));
+        this.livroParaExcluir = null;
+        this.excluindoLivro = false;
+        this.changeDetector.markForCheck();
+      },
+      error: () => {
+        this.erroExclusao = 'Não foi possível excluir o livro. Tente novamente.';
+        this.excluindoLivro = false;
+        this.changeDetector.markForCheck();
+      },
+    });
+  }
+
+  fecharConfirmacaoExclusao(): void {
+    if (this.excluindoLivro) return;
+    this.livroParaExcluir = null;
+    this.erroExclusao = '';
+  }
+
+  usarCapaPadrao(imagem: HTMLImageElement): void {
+    imagem.src = CAPA_PADRAO;
+  }
+
   get livrosFiltrados(): Livro[] {
-    return this.livrosService.buscar(
+    return this.livrosService.buscarEm(
+      this.livros(),
       this.termo,
       this.categoriaSelecionada
     );
   }
 
   get livrosDestaque(): Livro[]{
-    return this.livros.filter((livro) => livro.destaque)
+    return this.livros().filter((livro) => livro.destaque)
   }
 
   get categorias(): string[]{
     return [...new Set(
-      this.livros.flatMap((livro) => livro.categorias)
+      this.livros().flatMap((livro) => livro.categorias)
     )].sort();
   }
 

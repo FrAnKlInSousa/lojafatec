@@ -1,0 +1,39 @@
+<main class="container py-5">
+  <h1 class="mb-4">Meu perfil</h1>
+
+  <section class="profile-card mb-4">
+    <h2>Dados pessoais e endereço</h2>
+    <p *ngIf="mensagemPerfil" class="alert alert-success">{{ mensagemPerfil }}</p>
+    <p *ngIf="erroPerfil" class="alert alert-danger">{{ erroPerfil }}</p>
+    <form #perfilForm="ngForm" (ngSubmit)="salvarPerfil()">
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label" for="nome">Nome</label><input class="form-control" id="nome" name="nome" [(ngModel)]="nome" required></div>
+        <div class="col-md-6"><label class="form-label" for="email">Email</label><input class="form-control" [class.is-invalid]="email.length > 0 && !perfilEmailValido" id="email" name="email" type="email" [ngModel]="email" (ngModelChange)="email = $event" required><div class="invalid-feedback" *ngIf="email.length > 0 && !perfilEmailValido">Informe um e-mail válido, como nome&#64;exemplo.com.</div></div>
+        <div class="col-md-6"><label class="form-label" for="documento">CPF</label><input class="form-control" [class.is-invalid]="documento.length > 0 && !perfilCpfValido" id="documento" name="documento" [ngModel]="documento" (ngModelChange)="documento = mascararCpf($event)" (keydown)="bloquearCaractereNaoNumerico($event)" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required><div class="invalid-feedback" *ngIf="documento.length > 0 && !perfilCpfValido">Informe um CPF válido.</div></div>
+        <div class="col-md-6"><label class="form-label" for="telefone">Telefone</label><input class="form-control" [class.is-invalid]="telefone.length > 0 && !perfilTelefoneValido" id="telefone" name="telefone" [ngModel]="telefone" (ngModelChange)="telefone = mascararTelefone($event)" (keydown)="bloquearCaractereNaoNumerico($event)" type="tel" inputmode="tel" maxlength="15" placeholder="(11) 99999-9999" required><div class="invalid-feedback" *ngIf="telefone.length > 0 && !perfilTelefoneValido">Informe um telefone válido com DDD.</div></div>
+        <div class="col-md-8"><label class="form-label" for="rua">Rua</label><input class="form-control" id="rua" name="rua" [(ngModel)]="logradouro.rua" required></div>
+        <div class="col-md-4"><label class="form-label" for="numero">Número</label><input class="form-control" id="numero" name="numero" [(ngModel)]="logradouro.numero" required></div>
+        <div class="col-md-6"><label class="form-label" for="complemento">Complemento</label><input class="form-control" id="complemento" name="complemento" [(ngModel)]="logradouro.complemento"></div>
+        <div class="col-md-6"><label class="form-label" for="cep">CEP</label><input class="form-control" [class.is-invalid]="logradouro.cep.length > 0 && !cepValido(logradouro.cep)" id="cep" name="cep" [ngModel]="logradouro.cep" (ngModelChange)="logradouro.cep = mascararCep($event)" (keydown)="bloquearCaractereNaoNumerico($event)" inputmode="numeric" maxlength="9" placeholder="00000-000" required><div class="invalid-feedback" *ngIf="logradouro.cep.length > 0 && !cepValido(logradouro.cep)">Informe um CEP válido.</div></div>
+        <div class="col-md-6"><label class="form-label" for="bairro">Bairro</label><input class="form-control" id="bairro" name="bairro" [(ngModel)]="logradouro.bairro" required></div>
+        <div class="col-md-4"><label class="form-label" for="cidade">Cidade</label><input class="form-control" id="cidade" name="cidade" [(ngModel)]="logradouro.cidade" required></div>
+        <div class="col-md-2"><label class="form-label" for="estado">UF</label><input class="form-control" id="estado" name="estado" maxlength="2" [(ngModel)]="logradouro.estado" required></div>
+      </div>
+      <button class="btn btn-dark mt-4" type="submit" [disabled]="salvandoPerfil || perfilForm.invalid || !perfilValido">{{ salvandoPerfil ? 'Salvando...' : 'Salvar dados' }}</button>
+    </form>
+  </section>
+
+  <section class="profile-card">
+    <h2>Alterar senha</h2>
+    <p *ngIf="mensagemSenha" class="alert alert-success">{{ mensagemSenha }}</p>
+    <p *ngIf="erroSenha" class="alert alert-danger">{{ erroSenha }}</p>
+    <form #senhaForm="ngForm" (ngSubmit)="salvarSenha()">
+      <div class="row g-3">
+        <div class="col-md-4"><label class="form-label" for="senhaAtual">Senha atual</label><input class="form-control" id="senhaAtual" name="senhaAtual" type="password" [(ngModel)]="senhaAtual" required></div>
+        <div class="col-md-4"><label class="form-label" for="novaSenha">Nova senha</label><input class="form-control" [class.is-invalid]="novaSenha.length > 0 && !novaSenhaValida" id="novaSenha" name="novaSenha" type="password" [(ngModel)]="novaSenha" minlength="6" required><div class="invalid-feedback" *ngIf="novaSenha.length > 0 && !novaSenhaValida">A senha precisa ter pelo menos 6 caracteres.</div></div>
+        <div class="col-md-4"><label class="form-label" for="confirmarSenha">Confirmar nova senha</label><input class="form-control" [class.is-invalid]="confirmarSenha.length > 0 && !confirmarNovaSenhaValida" id="confirmarSenha" name="confirmarSenha" type="password" [(ngModel)]="confirmarSenha" required><div class="invalid-feedback" *ngIf="confirmarSenha.length > 0 && !confirmarNovaSenhaValida">As senhas informadas não são iguais.</div></div>
+      </div>
+      <button class="btn btn-outline-dark mt-4" type="submit" [disabled]="salvandoSenha || senhaForm.invalid || !novaSenhaValida || !confirmarNovaSenhaValida">{{ salvandoSenha ? 'Salvando...' : 'Alterar senha' }}</button>
+    </form>
+  </section>
+</main>

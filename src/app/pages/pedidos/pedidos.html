@@ -1,0 +1,43 @@
+<main class="container py-5">
+  <h1 class="mb-4">Meus pedidos</h1>
+  <p *ngIf="carregando">Carregando pedidos...</p>
+  <p *ngIf="erro" class="alert alert-danger">{{ erro }}</p>
+  <div *ngIf="!carregando && !erro && pedidos.length === 0" class="empty-orders">
+    <h2>Você ainda não fez pedidos.</h2>
+    <a routerLink="/" class="btn btn-dark mt-3">Explorar livros</a>
+  </div>
+
+  <article *ngFor="let pedido of pedidos" class="order-card mb-4">
+    <header class="d-flex justify-content-between gap-3 flex-wrap mb-3">
+      <div><h2>Pedido #{{ pedido.codigoPedido }}</h2><small>{{ pedido.dataPedido | date:'dd/MM/yyyy' }}</small></div>
+      <span class="order-status" [class.order-status-delivered]="pedido.status === 'ENTREGUE'" [class.order-status-transit]="pedido.status !== 'ENTREGUE'">
+        <i class="bi" [class.bi-check-circle-fill]="pedido.status === 'ENTREGUE'" [class.bi-truck]="pedido.status !== 'ENTREGUE'" aria-hidden="true"></i>
+        {{ rotuloStatus(pedido.status) }}
+      </span>
+    </header>
+    <ul class="list-group mb-3">
+      <li *ngFor="let item of pedido.itens" class="list-group-item order-item">
+        <img class="order-item-cover" [src]="item.capa" [alt]="'Capa de ' + item.titulo" (error)="usarCapaPadrao($event.target)">
+        <span class="order-item-title">{{ item.titulo }} · {{ item.quantidade }} un.</span>
+        <strong>{{ item.subtotal | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
+      </li>
+    </ul>
+    <p class="mb-1"><strong>Entrega:</strong> {{ pedido.entrega.rua }}, {{ pedido.entrega.numero }} — {{ pedido.entrega.cidade }}/{{ pedido.entrega.estado }}</p>
+    <p><strong>Total:</strong> {{ pedido.valorTotal | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+    <button *ngIf="pedido.status !== 'ENTREGUE'" class="btn btn-outline-success" (click)="confirmarEntrega(pedido)">Confirmar entrega</button>
+  </article>
+</main>
+
+<div class="delivery-confirmation-backdrop" *ngIf="pedidoParaConfirmar as pedido" (click)="fecharConfirmacao()">
+  <section class="delivery-confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="confirmar-entrega-titulo" (click)="$event.stopPropagation()">
+    <h2 id="confirmar-entrega-titulo">Confirmar entrega</h2>
+    <p>Você confirma que recebeu o pedido <strong>#{{ pedido.codigoPedido }}</strong>?</p>
+    <p *ngIf="erroAtualizacao" class="alert alert-danger" role="alert">{{ erroAtualizacao }}</p>
+    <div class="d-flex justify-content-end gap-2">
+      <button type="button" class="btn btn-outline-secondary" (click)="fecharConfirmacao()" [disabled]="atualizandoPedido">Voltar</button>
+      <button type="button" class="btn btn-success" (click)="confirmarRecebimento()" [disabled]="atualizandoPedido">
+        {{ atualizandoPedido ? 'Atualizando...' : 'Confirmar recebimento' }}
+      </button>
+    </div>
+  </section>
+</div>
