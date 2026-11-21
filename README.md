@@ -12,6 +12,16 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Integração com o back-end
+
+O front busca o catálogo em `http://localhost:8081/api`. Inicie o Spring Boot na raiz do projeto:
+
+```bash
+npm run start:back
+```
+
+Em outro terminal, inicie o Angular com `npm start` (porta 4200). Com a configuração atual, o Spring Boot usa `lojinha/lojinha.db`, pois o caminho `jdbc:sqlite:lojinha.db` é relativo à pasta do projeto Maven. Se o back-end estiver desligado, a loja continua usando o catálogo local.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
